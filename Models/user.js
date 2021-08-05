@@ -1,6 +1,6 @@
 const Db = require('../config/db');
 const sequelize = require('sequelize');
-const {UUIDV4} = require('sequelize');
+const Contact = require('./Contact');
 
 
 const Users = Db.define(process.env.TABLENAME, {
@@ -17,4 +17,10 @@ const Users = Db.define(process.env.TABLENAME, {
     }
 })
 
+Users.hasOne(Contact, {
+    foreignKey:'users_id'
+})
+Contact.belongsTo(Users,{
+    foreignKey:'users_id'
+})
 module.exports = Users;
